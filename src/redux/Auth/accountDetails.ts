@@ -2,19 +2,29 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 interface accountDetailsSchema {
-    accountDetails: any
+    isLoggedIn: boolean;
+    id: number | null;
+    username: string;
+    imgUrl: string;
+    cart: any[];
+    password: string;
 }
 
 const initialState: accountDetailsSchema = {
-    accountDetails: {}
+    isLoggedIn: false,
+    id: null,
+    username: '',
+    imgUrl: '',
+    cart: [],
+    password: ""
 }
 
 const accountDetailsSlice = createSlice({
     initialState,
     name: "account",
     reducers: {
-        setAccDetails: (state, action: PayloadAction) => {
-            state.accountDetails = action.payload
+        setAccDetails: (state, action: PayloadAction<Partial<accountDetailsSchema>>) => {
+            return { ...state, ...action.payload };
         }
     }
 })

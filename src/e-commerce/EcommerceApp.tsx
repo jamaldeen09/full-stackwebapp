@@ -5,6 +5,8 @@ import { useEffect } from "react"
 import { updateStore } from "../redux/Product/products"
 import { newProduct } from "../redux/Product/singleProduct"
 import { useNavigate } from "react-router"
+import { setAccDetails } from "../redux/Auth/accountDetails";
+
 
 
 const ECommerceApp = () => {
@@ -15,6 +17,7 @@ const ECommerceApp = () => {
 
     // State management
     const productsStorage = selector.productStore.products
+    
     // GET products
     const GETproducts = async () => {
         try {
@@ -35,8 +38,27 @@ const ECommerceApp = () => {
     }
 
     useEffect(() => {
-        GETproducts()
-    }, [])
+      const fetchSingleUser = async () => {
+        try { 
+          const response = await fetch("http://localhost:4080/api/single-user", {
+            method: "GET",
+            credentials: "include"
+          })
+
+          const data = await response.json()
+          if (!data.userInformation) {
+            return;
+          }
+
+          dispatch(setAccDetails(data.userInformation))
+        } catch (err) {
+          console.error(err)
+        }
+      }
+
+      fetchSingleUser()
+      GETproducts()
+    }, [dispatch])
 
     // GET SINGLE PRODUCT
     const GETsingleproduct = async (id: number) => {
@@ -47,7 +69,8 @@ const ECommerceApp = () => {
             })
             const data = await response.json();
             if(!data.product){
-                return;
+
+              return;
             }
             dispatch(newProduct(data.product));
             navigate("/productPage")
@@ -94,7 +117,7 @@ const ECommerceApp = () => {
 
              {/* Product Card Section */}
             <div 
-              className="w-fullmin-h-96 grid gap-16 py-10 grid-cols-1 px-8 justify-items-center
+              className="w-full min-h-96 grid gap-16 py-10 grid-cols-1 px-8 justify-items-center
               sm:px-24
               md:grid-cols-2 md:px-10
               smallTablet:grid-cols-1

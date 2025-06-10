@@ -1,4 +1,4 @@
-const usersCollection = [
+export const usersCollection = [
     
 ]
 const itemCollection = [

@@ -4,6 +4,9 @@ import singleProductSlice from "./Product/singleProduct"
 import usernameSlice from "./Auth/username"
 import passwordSlice from "./Auth/password"
 import accountDetailsSlice from "./Auth/accountDetails"
+import profilePicSlice from "./Auth/profilePic"
+import itemSlice from "./Cart/addedItem"
+
 
 const store = configureStore({
     reducer: {
@@ -13,6 +16,8 @@ const store = configureStore({
         name: usernameSlice,
         Password: passwordSlice,
         account: accountDetailsSlice,
+        profile: profilePicSlice,
+        addedItem: itemSlice,
     }
 })
 

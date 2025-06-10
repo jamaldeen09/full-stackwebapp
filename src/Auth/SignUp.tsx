@@ -5,8 +5,8 @@ import { resetName, setName } from "../redux/Auth/username";
 import { resetPassword, setPassword } from "../redux/Auth/password";
 import { useState } from "react";
 import { nameValidation,passwordValidation } from "./Validation/validation";
-import { setAccDetails } from "../redux/Auth/accountDetails";
 import { useNavigate } from "react-router";
+import { setProfilePic } from "../redux/Auth/profilePic";
 
 const SignUp = () => {
 
@@ -17,26 +17,28 @@ const SignUp = () => {
     // extracting name and password
     const name = selector.name.username
     const password = selector.Password.password
-    const newUser = selector.account.accountDetails
     const navigate = useNavigate();
     const [ validation,setValidation ] = useState<boolean>(false)
     const [ accountFound,setAccountFound ] = useState<boolean>(false);
+    const newUser = selector.account
+    const imgUrl = selector.profile.profilePic
 
 
     // create POST request
-    const POSTnewuser = async(e: React.FormEvent<HTMLFormElement>) => {
+    const POSTnewuser = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
         const nameValidity = nameValidation(name)
         const passwordValidity = passwordValidation(password)
+        const isValidURL = !isNaN(parseInt(imgUrl)) ? false : !imgUrl ? false : true
        
 
-        if (nameValidity && passwordValidity){
+        if (nameValidity && passwordValidity && isValidURL){
             try {
                 const response = await fetch("http://localhost:4080/api/users", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ username: name, password: password }),
+                    body: JSON.stringify({ username: name, password: password,imgUrl: imgUrl }),
                     credentials: "include"
                 })
                 const data = await response.json();
@@ -54,9 +56,7 @@ const SignUp = () => {
                 }
 
                 if (data.accountDetails) {
-                  console.log(data);
-                  setAccountFound(false)
-                  dispatch(setAccDetails(newUser))
+                  setAccountFound(false)        
                   dispatch(resetName())
                   dispatch(resetPassword())
 
@@ -69,6 +69,7 @@ const SignUp = () => {
             }
         }
     }
+    
   return (
     <>
       <Navbar />
@@ -93,7 +94,7 @@ const SignUp = () => {
               placeholder="Username"
             />
             <p className="text-red-600">
-                {nameValidation(name) ? "" : validation ? "Invalid Name" : accountFound ? "Account already exists" : "Invalid Name"}
+                {nameValidation(name) ? "" : validation ? "Invalid Name" : accountFound ? "Account already exists" : newUser.isLoggedIn ? "Already Logged In" : "Invalid Name"}
             </p>
           </div>
 
@@ -108,7 +109,22 @@ const SignUp = () => {
               placeholder="Password"
             />
             <p className="text-red-600">
-              {passwordValidation(password) ? "" : validation ? "Invalid Password" : accountFound ? "Account already exists" : "Invalid Password"}
+              {passwordValidation(password) ? "" : validation ? "Invalid Password" : accountFound ? "Account already exists" :  newUser.isLoggedIn ? "Already Logged In" : "Invalid Password"}
+            </p>
+          </div>
+
+          <div className="w-full flex flex-col gap-2 items-center justify-center">
+            <Input 
+              value={imgUrl}
+              onChange={(e: React.ChangeEvent<HTMLInputElement> | any) => dispatch(setProfilePic(e.target.value))}
+              placeholder="URL" 
+              className="isolate items-center flex justify-between  bg-white/5 shadow-lg ring-1 ring-black/5 text-white 
+            h-16 w-full max-w-sm
+            sm:max-w-lg
+            md:max-w-xl"
+            />
+            <p className="text-red-600">
+              {!isNaN(parseInt(imgUrl)) ? "Invalid Profile Picture" : !imgUrl ? "Invalid Profile Picture" : ""}
             </p>
           </div>
 
