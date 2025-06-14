@@ -1,26 +1,18 @@
-import { configureStore } from "@reduxjs/toolkit";
-import productsSlice from "./Product/products";
-import singleProductSlice from "./Product/singleProduct"
-import usernameSlice from "./Auth/username"
-import passwordSlice from "./Auth/password"
-import accountDetailsSlice from "./Auth/accountDetails"
-import profilePicSlice from "./Auth/profilePic"
-import itemSlice from "./Cart/addedItem"
-
+import { configureStore } from "@reduxjs/toolkit"
+import emailSlice from "./Auth/EmailSlice"
+import passwordSlice from "./Auth/PasswordSlice"
+import usernameSlice from "./Auth/UsernameSlice"
+import canvasSlice from "./Sidebar/CanvasSlice"
 
 const store = configureStore({
     reducer: {
-        // Slices goes here
-        productStore: productsSlice,
-        product: singleProductSlice,
-        name: usernameSlice,
-        Password: passwordSlice,
-        account: accountDetailsSlice,
-        profile: profilePicSlice,
-        addedItem: itemSlice,
+        emailAddress: emailSlice,
+        usersPassword: passwordSlice,
+        username: usernameSlice,
+        offcanvas: canvasSlice,
     }
 })
 
+export default store;
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
-export default store

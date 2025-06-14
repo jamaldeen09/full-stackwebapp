@@ -13,11 +13,6 @@
 }
 
 /* Main styles */
-body {
-  background-color: black;
-}
-
-/* Main styles */
 
 @layer components {
   .show-modal {

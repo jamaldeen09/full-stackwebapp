@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { cn } from "/Users/macbook/cookie-auth-app/src/lib/utils"
+import { cn } from "/Users/macbook/full-stack-webapp/src/lib/utils"
 
 const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
   ({ className, type, ...props }, ref) => {

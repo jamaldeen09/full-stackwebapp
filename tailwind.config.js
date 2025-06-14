@@ -8,27 +8,23 @@ module.exports = {
   theme: {
   	extend: {
   		screens: {
-  			verySmall: {
-  				max: '414px',
-  				min: '344px'
-  			},
   			midLaptop: {
   				max: '1470px',
   				min: '1024px'
   			},
-  			midIpad: {
-  				max: '1030px',
-  				min: '1024px'
-  			},
-  			iphone14: {
+  			iphone: {
   				max: '430px',
-  				min: '342px'
+  				min: '344px'
   			},
   			smallTablet: {
   				max: '900px',
   				min: '768px'
   			},
-  			xs: '344px'
+			midIpad: {
+				max: `1080px`,
+				min: "1024px",
+			},
+  			realSmall: { max: "344px", min: "200px" }
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
