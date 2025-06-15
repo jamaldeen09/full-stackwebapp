@@ -21,7 +21,11 @@ AuthRouter.post("/signup",
             if (existingUser)
                 return response.status(400).send({ msg: "You already have an account. Please Log in" , existingID: existingUser._id })
 
-            const newUser = await Users.create(validData);
+            const usersInformation = {
+                ...validData,
+                cart: []
+            }
+            const newUser = await Users.create(usersInformation);
             const secretKey = process.env.ACCESS_TOKEN_KEY
             const generatedToken = JWT.sign({ id: newUser._id, username: newUser.username }, secretKey, { expiresIn: "2h" })
             return response.status(201).send({

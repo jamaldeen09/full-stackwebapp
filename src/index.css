@@ -55,6 +55,18 @@
   }
 }
 
+.card:hover button{
+  @apply bg-white text-purple-500
+}
+
+.active {
+  @apply bg-purple-500 text-white
+}
+
+.notActive {
+  @apply  backdrop-blur-lg bg-purple-500/5
+}
+
 
 @layer base {
   :root {

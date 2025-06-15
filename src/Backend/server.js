@@ -2,6 +2,9 @@ const express = require("express")
 const cors = require("cors")
 const mongoose = require("mongoose")
 const { AuthRouter } = require("./Routes/AuthRouter")
+const { productRoute } = require("./Routes/ProductRoute")
+const { products } = require("./dataStructure")
+const { Products } = require("./Models/Product")
 require("dotenv").config({ path: __dirname + "/.env" })
 
 
@@ -15,8 +18,13 @@ app.use(cors({
     origin: "http://localhost:5173"
 }))
 app.use("/api", AuthRouter)
+app.use("/api", productRoute)
 
-mongoose.connect(URL).then(() => {
+mongoose.connect(URL)
+  .then(() => {
+    return Products.insertMany(products);
+  })
+  .then(() => {
     console.log("Successfully connected to mongoDb")
     app.listen(PORT, () => console.log(`Port ${PORT} is being listened to`))
 }).catch((err) => console.error(err))

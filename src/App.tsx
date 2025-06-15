@@ -5,6 +5,7 @@ import Login from "./Authentication/Login/Login";
 import Dashboard from "./Application/Dashboard/Dashboard";
 import ProtectedRoute from "./components/ui/ProtectedRoute";
 import Content from "./Application/Dashboard/Content/Content";
+import Products from "./Application/Dashboard/Products/Products";
 
 const App = () => {
   return (
@@ -20,9 +21,10 @@ const App = () => {
       </ProtectedRoute>}>
       
         <Route index element={<Content />} />
-          <Route path="products" element={""} />
+          <Route path="products" element={<Products />} />
           <Route path="cart" element={""} />
           <Route path="chatbot" element={""} />
+          <Route path="profile" element={""} />
         </Route>
       <Route path="*" element={""}/>
     </Routes>

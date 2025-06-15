@@ -1,6 +1,6 @@
 import { Outlet } from "react-router"
-import Content from "./Content/Content"
 import Sidebar from "./Sidebar"
+
 
 const Dashboard = () => {
   return (
@@ -11,6 +11,7 @@ const Dashboard = () => {
 
         {/* Main content */}
         <div className="w-full  h-full col-span-10 lg:col-span-8">
+            
             <Outlet />
         </div>
     </div>

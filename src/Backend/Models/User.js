@@ -1,5 +1,6 @@
 const mongoose = require("mongoose")
 
+
 const userSchema = mongoose.Schema({
     username: {
         type: String,
@@ -11,6 +12,10 @@ const userSchema = mongoose.Schema({
     },
     password: {
         type: String,
+        required: true
+    },
+    cart: {
+        type: [ Object ],
         required: true
     }
 })

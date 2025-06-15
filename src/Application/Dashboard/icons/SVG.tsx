@@ -1,4 +1,4 @@
-import { faArrowRight, faBars, faBasketShopping, faCartShopping, faHouse, faMicrochip, faSignOutAlt, faX } from "@fortawesome/free-solid-svg-icons"
+import { faArrowRight, faBars, faBasketShopping, faCartShopping, faHeart, faHouse, faMicrochip, faMinus, faPlus, faSignOutAlt, faStar, faUser, faX } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faReact } from '@fortawesome/free-brands-svg-icons';
 
@@ -11,3 +11,8 @@ export const logout = <FontAwesomeIcon icon={faSignOutAlt}/>
 export const harmBurgerMenu = <FontAwesomeIcon icon={faBars} />
 export const x = <FontAwesomeIcon icon={faX} />
 export const arrow = <FontAwesomeIcon icon={faArrowRight} />
+export const star = <FontAwesomeIcon icon={faStar} />
+export const plus = <FontAwesomeIcon icon={faPlus} />
+export const user = <FontAwesomeIcon icon={faUser} />
+export const heart = <FontAwesomeIcon icon={faHeart} />
+export const minus = <FontAwesomeIcon icon={faMinus} />

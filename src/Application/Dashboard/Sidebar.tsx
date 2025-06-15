@@ -1,4 +1,4 @@
-import { aiIcon, cart, house, logout, product, reactIcon, x } from "./icons/SVG"
+import { aiIcon, cart, house, logout, product, reactIcon, user, x } from "./icons/SVG"
 import { useLocation, useNavigate } from "react-router"
 import { useAppSelector,useAppDispatch } from "../../redux/hooks"
 import { deactivateCanvas } from "../../redux/Sidebar/CanvasSlice";
@@ -63,6 +63,13 @@ const Sidebar = () => {
             <p className={`${location.pathname === "/dashboard/cart" ? "text-black" : "text-gray-400"}`}>Cart</p>
           </li>
 
+          <li onClick={() => navigate("profile")}
+            className={`text-md midIpad:text-sm text-gray-400
+            hover:bg-gray-100 hover:cursor-pointer active:brightness-95 transtion-all
+            flex items-center gap-3 p-4 ${location.pathname === "/dashboard/profile" ? "bg-gray-100 rounded-md text-black" : ""}`}>
+             <p className={`${location.pathname === "/dashboard/profile" ? "text-black" : "text-gray-400"}`}>{user}</p>
+             <p className={`${location.pathname === "/dashboard/profile" ? "text-black" : "text-gray-400"}`}>Profile</p>
+          </li>
 
           <li onClick={() => navigate("chatbot")}
             className={`text-md midIpad:text-sm text-gray-400
@@ -113,7 +120,7 @@ const Sidebar = () => {
 
 
         {/* Logout */}
-      <div className="w-full flex justify-center items-center gap-4 ">
+      <div className="w-full flex justify-center items-end gap-4 h-full py-6">
         <div className="w-fit flex gap-4 hover:text-red-600 hover:cursor-pointer">
           <p className="text-md midIpad:text-sm">
             {logout}
@@ -186,6 +193,13 @@ const Sidebar = () => {
             <p className={`${location.pathname === "/dashboard/cart" ? "text-black" : "text-gray-400"}`}>Cart</p>
           </li>
 
+          <li onClick={() => navigate("profile")}
+            className={`text-md midIpad:text-sm text-gray-400
+            hover:bg-gray-100 hover:cursor-pointer active:brightness-95 transtion-all
+            flex items-center gap-3 p-4 ${location.pathname === "/dashboard/profile" ? "bg-gray-100 rounded-md text-black" : ""}`}>
+             <p className={`${location.pathname === "/dashboard/profile" ? "text-black" : "text-gray-400"}`}>{user}</p>
+             <p className={`${location.pathname === "/dashboard/profile" ? "text-black" : "text-gray-400"}`}>Profile</p>
+          </li>
 
           <li onClick={() => navigate("chatbot")}
             className={`text-md midIpad:text-sm text-gray-400
@@ -236,7 +250,7 @@ const Sidebar = () => {
 
 
         {/* Logout */}
-      <div className="w-full flex justify-center items-center gap-4 ">
+      <div className="w-full flex justify-center items-end gap-4 h-full py-6">
         <div className="w-fit flex gap-4 hover:text-red-600 hover:cursor-pointer text-md midIpad:text-sm">
           <p >
             {logout}
