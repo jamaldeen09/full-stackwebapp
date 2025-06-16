@@ -6,6 +6,7 @@ import Dashboard from "./Application/Dashboard/Dashboard";
 import ProtectedRoute from "./components/ui/ProtectedRoute";
 import Content from "./Application/Dashboard/Content/Content";
 import Products from "./Application/Dashboard/Products/Products";
+import Cart from "./Application/Dashboard/Products/Cart";
 
 const App = () => {
   return (
@@ -22,7 +23,7 @@ const App = () => {
       
         <Route index element={<Content />} />
           <Route path="products" element={<Products />} />
-          <Route path="cart" element={""} />
+          <Route path="cart" element={<Cart />} />
           <Route path="chatbot" element={""} />
           <Route path="profile" element={""} />
         </Route>

@@ -21,8 +21,12 @@ app.use("/api", AuthRouter)
 app.use("/api", productRoute)
 
 mongoose.connect(URL)
-  .then(() => {
-    return Products.insertMany(products);
+  .then(async () => {
+     try {
+      return await Products.insertMany(products)
+     } catch (err) {
+      console.error(err)
+     }
   })
   .then(() => {
     console.log("Successfully connected to mongoDb")

@@ -3,6 +3,8 @@ import emailSlice from "./Auth/EmailSlice"
 import passwordSlice from "./Auth/PasswordSlice"
 import usernameSlice from "./Auth/UsernameSlice"
 import canvasSlice from "./Sidebar/CanvasSlice"
+import productsSlice from "./Ecommerce/products"
+import cartSlice from "./Ecommerce/Cart"
 
 const store = configureStore({
     reducer: {
@@ -10,6 +12,8 @@ const store = configureStore({
         usersPassword: passwordSlice,
         username: usernameSlice,
         offcanvas: canvasSlice,
+        products: productsSlice,
+        cartContainer: cartSlice
     }
 })
 

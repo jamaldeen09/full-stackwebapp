@@ -1,5 +1,5 @@
-
-import { heart, minus, plus, star } from "../../icons/SVG";
+import { LucideFolderMinus } from "lucide-react";
+import { check, heart, minus, plus, star } from "../../icons/SVG";
 
 interface ProductCardSchema {
   name: string;
@@ -8,24 +8,19 @@ interface ProductCardSchema {
   rating: number;
   url: string;
   category: string;
-  amount: number;
-  increment: () => void;
-  decrement: () => void;
-  addtoCart: (id: string) => void;
-  id: string
+  id: string;
+  removeItem: (id: string) => void;
 }
 
-const ProductCard = ({
+const CartCard = ({
   name,
   description,
   price,
   rating,
   url,
-  amount,
-  increment,
-  decrement,
-  addtoCart,
-  id
+  id,
+  removeItem
+
 }: ProductCardSchema) => {
   return (
     <div className="sm:w-[30rem] md:w-full
@@ -41,9 +36,7 @@ const ProductCard = ({
         }}
         className="w-full relative h-60 rounded-t-xl"
       >
-        <p className="text-white backdrop-blur-md w-10 h-10 rounded-lg hover:scale-110 hover:cursor-pointer absolute right-6 top-4 flex justify-center items-center">
-          {heart}
-        </p>
+       
       </div>
 
       {/* Details */}
@@ -51,25 +44,7 @@ const ProductCard = ({
         <div className="flex justify-between">
           <p className="font-extrabold text-xl">{name || "Rice"}</p>
 
-          <div className="flex bg-gray-100 rounded-full justify-between items-center px-4 py-2 gap-6">
-            <div
-              style={{ borderRadius: "50%" }}
-              className={`flex items-center bg-white w-6 justify-center hover:cursor-pointer hover:scale-125 transition-all
-    hover:brightness-90 active:brightness-75`}
-            >
-              <p onClick={decrement}>{minus}</p>
-            </div>
-
-            <p>{amount}</p>
-
-            <div
-              style={{ borderRadius: "50%" }}
-              className={`flex items-center bg-purple-400 text-white w-6 justify-center hover:cursor-pointer hover:scale-125 transition-all
-        hover:brightness-90 active:brightness-75`}
-            >
-              <p onClick={increment}>{plus}</p>
-            </div>
-          </div>
+         
         </div>
         <div className="w-full flex justify-between py-4">
           <p>${price || "0.99"}</p>
@@ -93,17 +68,26 @@ const ProductCard = ({
       </div>
 
       {/* ADD to Cart */}
-      <div className="w-full px-4 mt-6">
+      <div className="w-full px-4 mt-6 flex justify-between gap-4">
         <button
-          onClick={() => addtoCart(id)}
-          className="w-full shadow-xl bg-purple-400 text-white font-bold rounded-md py-4 hover:brightness-90 active:brightness-75
+          className="shadow-xl w-1/2
+          bg-gray-300 text-white font-bold rounded-md py-4 hover:cursor-default
+            transition-all "
+        >
+          <span>Added {check}</span>
+        </button>
+
+        <button
+          onClick={() => removeItem(id)}
+          className="shadow-xl w-1/2
+           bg-red-600 text-white font-bold rounded-md py-4 hover:brightness-90 active:brightness-75
             hover:cursor-pointer transition-all "
         >
-          Add to Cart
+          Remove
         </button>
       </div>
     </div>
   );
 };
 
-export default ProductCard;
+export default CartCard;

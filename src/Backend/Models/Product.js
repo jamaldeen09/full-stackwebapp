@@ -24,7 +24,7 @@ const productSchema = mongoose.Schema({
     category: {
         type: String,
         required: true
-    }
+    },
 })
 
 const Products = mongoose.model("Products", productSchema)

@@ -46,7 +46,7 @@ AuthRouter.post("/login",
             const errors = validationResult(request)
             if (!errors.isEmpty())
                 return response.status(400).send({ error: errors.array() })
-
+            
             const validData = matchedData(request);
             const extractedUsername = validData.username;
             const extractedPassword = validData.password;
@@ -56,7 +56,7 @@ AuthRouter.post("/login",
                 return response.status(400).send({ msg: "You do not have an account. Please Create an account", noAcc: true })
 
             const secretKey = process.env.ACCESS_TOKEN_KEY
-            const newToken = JWT.sign({ id: isExist._id, username: isExist.username }, secretKey, { expiresIn: "2h" })
+            const newToken = JWT.sign({ id: isExist._id, username: isExist.username }, secretKey, { expiresIn: "7d" })
 
             return response.status(200).send({
                 msg: "Account Successully found",

@@ -1,4 +1,4 @@
-import { faArrowRight, faBars, faBasketShopping, faCartShopping, faHeart, faHouse, faMicrochip, faMinus, faPlus, faSignOutAlt, faStar, faUser, faX } from "@fortawesome/free-solid-svg-icons"
+import { faArrowRight, faBars, faBasketShopping, faCartShopping, faCheck, faHeart, faHouse, faMicrochip, faMinus, faPlus, faSignOutAlt, faStar, faUser, faX } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faReact } from '@fortawesome/free-brands-svg-icons';
 
@@ -16,3 +16,4 @@ export const plus = <FontAwesomeIcon icon={faPlus} />
 export const user = <FontAwesomeIcon icon={faUser} />
 export const heart = <FontAwesomeIcon icon={faHeart} />
 export const minus = <FontAwesomeIcon icon={faMinus} />
+export const check = <FontAwesomeIcon icon={faCheck} />

@@ -21,3 +21,4 @@ const productsSlice = createSlice({
 })
 
 export const { newBatch } = productsSlice.actions;
+export default productsSlice.reducer;
