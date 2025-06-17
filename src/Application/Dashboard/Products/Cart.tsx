@@ -110,7 +110,7 @@ const Cart = () => {
 
   return (
     <>
-      <Innernav name={information.username} />
+       <Innernav name={information.username || "Loading..."}/>
 
       {cart.length <= 0 ? (
         <div className="flex justify-center items-center min-h-screen">

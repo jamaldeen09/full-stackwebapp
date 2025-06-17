@@ -10,7 +10,7 @@ const Profile = () => {
       const information = useAppSelector(state => state.info.information)
   return (
     <div className="w-full">
-        <Innernav name={information.username}/>
+         <Innernav name={information.username || "Loading..."}/>
 
         <div className="w-full h-fit flex justify-center items-center flex-col gap-20">
 

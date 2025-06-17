@@ -129,7 +129,7 @@ const Products = () => {
   const information = useAppSelector(state => state.info.information)
   return (
     <>
-      <Innernav name={information.username} />
+      <Innernav name={information.username || "Loading..."}/>
       {/* Categories */}
       <div className="w-full flex flex-col gap-6 py-10">
         <div className="w-full px-6">
