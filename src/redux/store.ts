@@ -5,6 +5,7 @@ import usernameSlice from "./Auth/UsernameSlice"
 import canvasSlice from "./Sidebar/CanvasSlice"
 import productsSlice from "./Ecommerce/products"
 import cartSlice from "./Ecommerce/Cart"
+import infoSlice from "./Auth/InfoSlice"
 
 const store = configureStore({
     reducer: {
@@ -13,7 +14,8 @@ const store = configureStore({
         username: usernameSlice,
         offcanvas: canvasSlice,
         products: productsSlice,
-        cartContainer: cartSlice
+        cartContainer: cartSlice,
+        info: infoSlice,
     }
 })
 

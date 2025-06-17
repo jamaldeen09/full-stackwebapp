@@ -7,6 +7,7 @@ import ProtectedRoute from "./components/ui/ProtectedRoute";
 import Content from "./Application/Dashboard/Content/Content";
 import Products from "./Application/Dashboard/Products/Products";
 import Cart from "./Application/Dashboard/Products/Cart";
+import Profile from "./Application/Dashboard/Profile/Profile";
 
 const App = () => {
   return (
@@ -25,7 +26,7 @@ const App = () => {
           <Route path="products" element={<Products />} />
           <Route path="cart" element={<Cart />} />
           <Route path="chatbot" element={""} />
-          <Route path="profile" element={""} />
+          <Route path="profile" element={<Profile />} />
         </Route>
       <Route path="*" element={""}/>
     </Routes>

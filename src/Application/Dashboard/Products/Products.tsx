@@ -8,14 +8,11 @@ import { useEffect, useState } from "react";
 import { newCart } from "../../../redux/Ecommerce/Cart";
 import { useNavigate } from "react-router";
 
-
-
 const Products = () => {
   // Important variables
   const selector = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   // GET products
   const fetchProducts = async () => {
@@ -30,8 +27,8 @@ const Products = () => {
         return;
       } else {
         //
-        console.log(productData)
-        dispatch(newBatch(productData.products))
+        console.log(productData);
+        dispatch(newBatch(productData.products));
         return;
       }
     } catch (error) {
@@ -52,9 +49,16 @@ const Products = () => {
 
   // Utility function (only if you want to abstract it)
   const handleCategoryClick = (category: string) => {
-    if (selectedCategory === "Burgers" || selectedCategory === "Pizzas" || selectedCategory === "Fries" || selectedCategory === "Drinks"
-      || selectedCategory === "Desserts" || selectedCategory === "Salads" || selectedCategory === "Wings" || selectedCategory === "Pastas"
-      || selectedCategory === "Tacos"
+    if (
+      selectedCategory === "Burgers" ||
+      selectedCategory === "Pizzas" ||
+      selectedCategory === "Fries" ||
+      selectedCategory === "Drinks" ||
+      selectedCategory === "Desserts" ||
+      selectedCategory === "Salads" ||
+      selectedCategory === "Wings" ||
+      selectedCategory === "Pastas" ||
+      selectedCategory === "Tacos"
     ) {
       setAll(false);
     }
@@ -63,64 +67,70 @@ const Products = () => {
   };
 
   // amount
-  const [ handleAmount,setHandleAmount ] = useState< {[ id: string ]: number} >({})
-  const [ all,setAll ] = useState<boolean>(false);
-
-  
+  const [handleAmount, setHandleAmount] = useState<{ [id: string]: number }>(
+    {}
+  );
+  const [all, setAll] = useState<boolean>(false);
 
   const incrementAmount = (id: string) => {
-    setHandleAmount((prev) => (
-      prev[id] === 20 ? { ...prev, [id]: (prev[id] || 1) + 0 } : { ...prev, [id]: (prev[id] || 1) + 1 }
-    ))
-  }
+    setHandleAmount((prev) =>
+      prev[id] === 20
+        ? { ...prev, [id]: (prev[id] || 1) + 0 }
+        : { ...prev, [id]: (prev[id] || 1) + 1 }
+    );
+  };
 
   const decrementAmount = (id: string) => {
-    setHandleAmount((prev) => (
-      prev[id] === 1 ? { ...prev,  [id]: (prev[id] || 1) - 0 } : { ...prev,  [id]: (prev[id] || 1) - 1 }
-    ))
-  }
-  const token = localStorage.getItem("token")
-
+    setHandleAmount((prev) =>
+      prev[id] === 1
+        ? { ...prev, [id]: (prev[id] || 1) - 0 }
+        : { ...prev, [id]: (prev[id] || 1) - 1 }
+    );
+  };
+  const token = localStorage.getItem("token");
 
   const addToCart = async (id: string) => {
-
     try {
-      const response = await fetch (`http://localhost:4050/api/products/cart/${id}?amount=${handleAmount[id]}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
+      const response = await fetch(
+        `http://localhost:4050/api/products/cart/${id}?amount=${handleAmount[id]}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
         }
-      })
-
-      console.log(handleAmount[id])
+      );
 
       const data = await response.json();
-      if (!data.cart){
-        console.log(data)
-        navigate("/login")
+      if (!data.cart) {
+        console.log(data);
+        navigate("/login");
         return;
       }
 
-      alert(`
-        ${(handleAmount[id] > 1 ? `${handleAmount[id]} 
-        ${products.find((item: any) => item._id === id).productName } has been added to your cart` : 
-        `${handleAmount[id]} ${products.find((item: any) => item._id === id).productName}`)} has been added to cart`
-      )
-
-      dispatch(newCart(data.cart));
-
+      alert(`${handleAmount[id]} ${products.find((item: any) => item._id === id).productName}'s has been added to your cart
+        `);
+      console.log(data);
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
+  };
   // filtered products
-  const filteredProducts = products.filter((product: any) => {
-    return product.category.toLowerCase() === selectedCategory.toLowerCase().trim();
-  }).slice(0, 6);
+  const filteredProducts = products
+    .filter((product: any) => {
+      return (
+        product.category.toLowerCase() === selectedCategory.toLowerCase().trim()
+      );
+    })
+    .slice(0, 6);
+
+  // GET users information
+  
+  const information = useAppSelector(state => state.info.information)
   return (
     <>
-      <Innernav name="Jamal" />
+      <Innernav name={information.username} />
       {/* Categories */}
       <div className="w-full flex flex-col gap-6 py-10">
         <div className="w-full px-6">
@@ -138,13 +148,17 @@ const Products = () => {
                 }}
                 styles={`
                           ${`${
-                             all ? "" : selectedCategory === category.name ? "active" : ""
+                            all
+                              ? ""
+                              : selectedCategory === category.name
+                              ? "active"
+                              : ""
                           }`}`}
               />
             );
           })}
           <div
-            onClick={ () => setAll(true) }
+            onClick={() => setAll(true)}
             className={`w-full min-w-44 md:min-w-44 midIpad:min-w-44 lg:min-w-40 rounded-2xl flex flex-col gap-3 border border-purple-500 justify-center items-center px-4 py-4
       hover:scale-105 hover:bg-purple-500 hover:text-white active:brightness-75 transition-all hover:cursor-pointer duration-300
       ${all ? "bg-purple-500 text-white" : "backdrop-blur-lg bg-purple-500/5"}`}
@@ -182,40 +196,43 @@ const Products = () => {
           className="w-full h-fit gap-10 px-6 py-8 justify-items-center
       grid md:grid-cols-2 midLaptop:grid-cols-2 lg:grid-cols-3"
         >
-          {
-            all ? products.map((product: any) => {
-              return <ProductCard 
-              key={product.productName}
-              name={product.productName}
-              url={product.imageUrl}
-              description={product.productDescription}
-              rating={product.rating}
-              category={product.category}
-              price={product.price}
-              id={product._id}
-              amount={handleAmount[product._id] || 1} 
-              increment={() => incrementAmount(product._id)}
-              decrement={() => decrementAmount(product._id)}
-              addtoCart={() => addToCart(product._id)}
-              />
-            }) :
-            filteredProducts.map((product: any) => {
-              return  <ProductCard 
-              key={product._id}
-              name={product.productName}
-              url={product.imageUrl}
-              description={product.productDescription}
-              rating={product.rating}
-              category={product.category}
-              price={product.price}
-              id={product._id}
-              amount={handleAmount[product._id] || 1} 
-              increment={() => incrementAmount(product._id)}
-              decrement={() => decrementAmount(product._id)}
-              addtoCart={() => addToCart(product._id)}
-              />
-            })
-          } 
+          {all
+            ? products.map((product: any) => {
+                return (
+                  <ProductCard
+                    key={product.productName}
+                    name={product.productName}
+                    url={product.imageUrl}
+                    description={product.productDescription}
+                    rating={product.rating}
+                    category={product.category}
+                    price={product.price}
+                    id={product._id}
+                    amount={handleAmount[product._id] || 1}
+                    increment={() => incrementAmount(product._id)}
+                    decrement={() => decrementAmount(product._id)}
+                    addtoCart={() => addToCart(product._id)}
+                  />
+                );
+              })
+            : filteredProducts.map((product: any) => {
+                return (
+                  <ProductCard
+                    key={product._id}
+                    name={product.productName}
+                    url={product.imageUrl}
+                    description={product.productDescription}
+                    rating={product.rating}
+                    category={product.category}
+                    price={product.price}
+                    id={product._id}
+                    amount={handleAmount[product._id] || 1}
+                    increment={() => incrementAmount(product._id)}
+                    decrement={() => decrementAmount(product._id)}
+                    addtoCart={() => addToCart(product._id)}
+                  />
+                );
+              })}
         </div>
       )}
     </>

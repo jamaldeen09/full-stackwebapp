@@ -3,7 +3,9 @@ const AuthRouter = express.Router();
 const { Users } = require("../Models/User")
 const { validationResult,matchedData,checkSchema } = require("express-validator")
 const { userCreationSchema } = require("../MiddleWares/UserSchema")
-const JWT = require("jsonwebtoken")
+const JWT = require("jsonwebtoken");
+const { request } = require("http");
+const { verifyToken } = require("../MiddleWares/ProtectedCartMiddleWare");
 
 AuthRouter.post("/signup", 
     checkSchema(userCreationSchema),
@@ -71,6 +73,31 @@ AuthRouter.post("/login",
 AuthRouter.get("/", async (request, response) => {
     const users = await Users.find()
     return response.send(users)
+})
+
+AuthRouter.get("/user-info", 
+    verifyToken,
+    async (request, response) => {
+        try {
+            if (!request.id)
+                return response.status(401).send({ success: false, msg: "Access Denied" })
+
+            const findInformation = await Users.findById(request.id);
+
+            const importantInfo = {
+                email: findInformation.email,
+                password: findInformation.password,
+                username: findInformation.username
+            }
+            return response.status(200).send({
+                msg: "User was found",
+                information: importantInfo
+            })
+
+        } catch (error) {
+            console.error(error)
+            return response.status(500).send({ msg: "Server Error" })
+        }
 })
 
 module.exports = {
