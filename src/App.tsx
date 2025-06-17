@@ -25,10 +25,14 @@ const App = () => {
         <Route index element={<Content />} />
           <Route path="products" element={<Products />} />
           <Route path="cart" element={<Cart />} />
-          <Route path="chatbot" element={""} />
           <Route path="profile" element={<Profile />} />
         </Route>
-      <Route path="*" element={""}/>
+      <Route path="*" element={<div className="flex justify-center items-center h-screen">
+        <img 
+          className="w-full"
+          src="https://admiral.digital/wp-content/uploads/2023/08/404_page-not-found.png" 
+          alt="" />
+      </div>}/>
     </Routes>
   )
 }

@@ -5,7 +5,6 @@ import { categories } from "./utils/categoryInfo";
 import { useAppSelector, useAppDispatch } from "../../../redux/hooks";
 import { newBatch } from "../../../redux/Ecommerce/products";
 import { useEffect, useState } from "react";
-import { newCart } from "../../../redux/Ecommerce/Cart";
 import { useNavigate } from "react-router";
 
 const Products = () => {

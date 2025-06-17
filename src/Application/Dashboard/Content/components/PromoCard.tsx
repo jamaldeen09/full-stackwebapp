@@ -1,14 +1,16 @@
 import ScrollFadeIn from "../../../../Animations/CardAnim";
-import { plus, star } from "../../icons/SVG";
+
 
 interface PromoCardSchema {
   url: string;
   productName: string;
   price: string;
   rating: string;
+  addCart: (id: string) => void;
+  id: string
 }
 
-const PromoCard = () => {
+const PromoCard = ({ url, productName, price, rating, addCart, id}: PromoCardSchema) => {
   return (
     <ScrollFadeIn>
       <div
@@ -18,7 +20,7 @@ const PromoCard = () => {
   realSmall:min-w-[18rem]
   sm:w-full sm:min-w-[30rem] h-96"
   style={{
-    backgroundImage: `url(https://img.freepik.com/free-photo/top-view-hamburger-plate_23-2148263001.jpg)`,
+    backgroundImage: `url(${url})`,
   }}
 >
   {/* Overlay */}
@@ -28,15 +30,16 @@ const PromoCard = () => {
       <h3 className="text-sm uppercase text-orange-300">
         🔥 Today’s Special
       </h3>
-      <h1 className="text-2xl sm:text-3xl font-bold mt-1">Double Stack Burger</h1>
+      <h1 className="text-2xl sm:text-3xl font-bold mt-1">{productName}</h1>
     </div>
 
     <div className="flex justify-between items-center mt-4 text-sm sm:text-base">
-      <p>⭐⭐⭐⭐⭐ 4.8</p>
-      <p className="text-lg font-bold">$12.99</p>
+      <p>⭐⭐⭐⭐⭐ {rating}</p>
+      <p className="text-lg font-bold">${price}</p>
     </div>
 
-    <button className="mt-4 bg-white text-black py-2 px-4 rounded-md w-fit hover:bg-orange-300 text-sm sm:text-base">
+    <button onClick={() => addCart(id)}
+    className="mt-4 bg-white text-black py-2 px-4 rounded-md w-fit hover:bg-orange-300 text-sm sm:text-base">
       Add to Cart
     </button>
   </div>

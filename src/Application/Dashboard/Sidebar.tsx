@@ -71,14 +71,7 @@ const Sidebar = () => {
              <p className={`${location.pathname === "/dashboard/profile" ? "text-black" : "text-gray-400"}`}>Profile</p>
           </li>
 
-          <li onClick={() => navigate("chatbot")}
-            className={`text-md midIpad:text-sm text-gray-400
-            hover:bg-gray-100 hover:cursor-pointer active:brightness-95 transtion-all
-            flex items-center gap-3 p-4 ${location.pathname === "/dashboard/chatbot" ? "bg-gray-100 rounded-md text-black" : ""}`}>
-             <p className={`${location.pathname === "/dashboard/chatbot" ? "text-black" : "text-gray-400"}`}>{aiIcon}</p>
-             <p className={`${location.pathname === "/dashboard/chatbot" ? "text-black" : "text-gray-400"}`}>Chatbot</p>
-          </li>
-
+        
         </ul>
       </div>
 
@@ -121,7 +114,11 @@ const Sidebar = () => {
 
         {/* Logout */}
       <div className="w-full flex justify-center items-end gap-4 h-full py-6">
-        <div className="w-fit flex gap-4 hover:text-red-600 hover:cursor-pointer">
+        <div onClick={() => {
+          localStorage.removeItem("token")
+          navigate("/");
+        }}
+        className="w-fit flex gap-4 hover:text-red-600 hover:cursor-pointer ">
           <p className="text-md midIpad:text-sm">
             {logout}
           </p>
@@ -201,13 +198,7 @@ const Sidebar = () => {
              <p className={`${location.pathname === "/dashboard/profile" ? "text-black" : "text-gray-400"}`}>Profile</p>
           </li>
 
-          <li onClick={() => navigate("chatbot")}
-            className={`text-md midIpad:text-sm text-gray-400
-            hover:bg-gray-100 hover:cursor-pointer active:brightness-95 transtion-all
-            flex items-center gap-3 p-4 ${location.pathname === "/dashboard/chatbot" ? "bg-gray-100 rounded-md text-black" : ""}`}>
-             <p className={`${location.pathname === "/dashboard/chatbot" ? "text-black" : "text-gray-400"}`}>{aiIcon}</p>
-             <p className={`${location.pathname === "/dashboard/chatbot" ? "text-black" : "text-gray-400"}`}>Chatbot</p>
-          </li>
+          
 
         </ul>
       </div>
@@ -251,7 +242,11 @@ const Sidebar = () => {
 
         {/* Logout */}
       <div className="w-full flex justify-center items-end gap-4 h-full py-6">
-        <div className="w-fit flex gap-4 hover:text-red-600 hover:cursor-pointer text-md midIpad:text-sm">
+        <div onClick={() => {
+          localStorage.removeItem("token")
+          navigate("/");
+        }}
+        className="w-fit flex gap-4 hover:text-red-600 hover:cursor-pointer text-md midIpad:text-sm ">
           <p >
             {logout}
           </p>

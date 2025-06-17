@@ -90,6 +90,24 @@ const Cart = () => {
     }
   };
 
+  // Clearing cart
+  const handleCartClearing = async () => {
+    try {
+      const response = await fetch ("http://localhost:4050/api/clear-cart", {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+      })
+
+      const data = await response.json()
+      alert("Cart Cleared Successfully")
+      GETcart()
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   return (
     <>
       <Innernav name={information.username} />
@@ -122,7 +140,8 @@ const Cart = () => {
             <h1>Total Items: {handleLength()}</h1>
             <h2>Total Price: ${calculateTotal()}</h2>
             <h3>Categories: {categories.map((res: any) => res).join(" , ")}</h3>
-            <button className="px-4 py-3 rounded-md shadow-xl hover:cursor-pointer hover:-translate-y-1 transition-all
+            <button onClick={handleCartClearing}
+            className="px-4 py-3 rounded-md shadow-xl hover:cursor-pointer hover:-translate-y-1 transition-all
             hover:brightness-90 active:brightness-75 bg-purple-400 text-white font-extrabold duration-300">
                  Clear Cart
             </button>
@@ -147,7 +166,7 @@ const Cart = () => {
                 />
               ));
             })}
-          </div>{" "}
+          </div>
         </div>
       )}
     </>

@@ -14,6 +14,10 @@ const mongoose = require("mongoose");
 const { User } = require("lucide-react");
 const ObjectId = mongoose.Types.ObjectId;
 
+const getRandomValue = (reference) => {
+  const random = Math.floor(Math.random() * reference.length )
+  return random
+}
 productRoute.get("/products", async (request, response) => {
   try {
     const extractedProducts = await Products.find();
@@ -164,4 +168,56 @@ productRoute.delete(
   }
 );
 
+productRoute.delete("/clear-cart", verifyToken, async (request, response) => {
+  try {
+    if (!request.id) {
+      return response.status(401).send({ msg: "Unauthorized Access" })
+    }
+    let findUser = await Users.findById(request.id);
+    console.log(findUser)
+    findUser.cart = [];
+    await findUser.save()
+
+    return response.status(200).send({
+      msg: "Cart cleared successfully",
+      cart: findUser.cart
+    })
+  } catch (err) {
+    console.error(err);
+    return response.status(500).send({
+      msg: "Server Error"
+    })
+  }
+})
+
+productRoute.get("/featured/favourites", 
+  verifyToken,
+  async (request, response) => {
+    try {
+      if (!request.id)
+        return response.status(401).send({ msg: "Access Denied" })
+
+      const products = await Products.find();
+
+      const featured = [];
+      const favourites = []
+      for (let i = 0; i < 3; i++) {
+        const randomVal = getRandomValue(products)
+        featured.push(products[randomVal])
+      }
+
+      for (let i = 0; i < 3; i ++) {
+        const randomVal = getRandomValue(products)
+        favourites.push(products[randomVal])
+      }
+
+      return response.status(200).send({
+        msg: "Success",
+        featuredProducts: featured,
+        favouriteProducts: favourites
+      })
+    } catch (err) {
+      console.error(err)
+    }
+})
 module.exports = { productRoute };
