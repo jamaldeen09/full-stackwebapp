@@ -20,21 +20,24 @@ const Content = () => {
       });
 
       const data = await response.json();
-      dispatch(newInfo(data. information))
+      dispatch(newInfo(data.information))
     } catch (error) {
       console.error(error);
     }
   };
   useEffect(() => {
-    GETuserinfo();
-    GETfeaturedAndFavourites()
+    const fetchData = async () => {
+      await GETuserinfo();
+      await GETfeaturedAndFavourites();
+    };
+    fetchData();
   }, []);
 
   const GETfeaturedAndFavourites = async () => {
     try {
       const response = await fetch ("http://localhost:4050/api/featured/favourites", {
         method: "GET",
-        headers: { "Authorization": `Bearer ${localStorage.getItem("token")} `}
+        headers: { "Authorization": `Bearer ${localStorage.getItem("token")}`}
       })
 
       const data = await response.json();
@@ -128,7 +131,8 @@ const Content = () => {
          <span className="sr-only">Loading...</span>
          </div>
          </div> : fanFavourites.map((item: any) => {
-              return <CardComponent url={item.imageUrl} name={item.productName} route={() => navigate("/dashboard/products")}/>
+              return <CardComponent key={item._id}
+              url={item.imageUrl} name={item.productName} route={() => navigate("/dashboard/products")}/>
             })
            }
         </div>

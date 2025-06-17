@@ -49,7 +49,7 @@ const ProductCard = ({
       {/* Details */}
       <div className="w-full  px-4 py-4">
         <div className="flex justify-between">
-          <p className="font-extrabold text-xl">{name || "Rice"}</p>
+          <p className="font-extrabold text-lg">{name || "Rice"}</p>
 
           <div className="flex bg-gray-100 rounded-full justify-between items-center px-4 py-2 gap-6">
             <div
